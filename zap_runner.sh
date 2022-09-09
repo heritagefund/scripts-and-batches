@@ -2,7 +2,9 @@
 
 function execute_queries( ) {
 
+  echo ""
   echo "EXECUTING QUERY ZAPS FOR FUNDING APP: $app_id -> "
+  echo ""
 
   echo "ApplicationId: $app_id"
   echo "40% payment amount: $amount"
