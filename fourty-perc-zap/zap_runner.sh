@@ -17,7 +17,7 @@ function execute_queries( ) {
 
 # UPDATE FUNDING APP
   update_result=`cf conduit funding-frontend-research --local-port 7081 -- psql -t -c "UPDATE funding_applications SET status = 3 WHERE id = '$app_id'"`&&
-  update_result=`echo $payment_request_id | sed 's/ *$//g' | grep -o '^\S*'`
+  update_result=`echo $update_result | sed 's/ *$//g' | grep -o '^\S*'`
   if [[ $update_result == *"Exit"* ]]; then
     echo "Error updating status of funding application $app_id"
     exit 1

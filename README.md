@@ -7,7 +7,7 @@ Scripts are as follows:
 
 This script will run zaps against a Postgres instance deployed on GovPaas, using the `Conduit` Cloud Foundary plugin provided by gov-alpha. The script executes queries to add a 40% payment request to an applications, simulating a completed M1 40% Journey.
 
-The details of the payment requests to be created and applications to be zapped are shored and read from a CSV files in the same directory as the script. 
+The details of the payment requests to be created and applications to be zapped are stored and read from a CSV files in the same directory as the script. 
 Each CSV line contains the following columns which are then passed into the SQL queries to be executed:
 
 - 40% payment amount (the payment amount requested)
