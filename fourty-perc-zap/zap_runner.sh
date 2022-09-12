@@ -12,6 +12,9 @@ function execute_queries( ) {
   echo "Form id: $form_id"
   echo ""
  
+#  NOTE: The database name stated after the conduit cmd should be modified to the appropriate DB name. 
+# (i.e. cf conduit [DB-NAME] --local-port 7081 -- psql -t -c "QUERY"")
+
 # UPDATE FUNDING APP
   update_result=`cf conduit funding-frontend-research --local-port 7081 -- psql -t -c "UPDATE funding_applications SET status = 3 WHERE id = '$app_id'"`&&
   update_result=`echo $payment_request_id | sed 's/ *$//g' | grep -o '^\S*'`
@@ -61,11 +64,12 @@ function execute_queries( ) {
   echo "|-------------------------------------------------------|"
 }
 
-echo "This script will  run zaps against Postgres in GovPaas to update 40% applications to create payment requests simulating a completed M1 40% Journey \n\n"
+echo "This script will run zaps against a Postgres instance deployed on GovPaas, using the `Conduit` Cloud Foundry plugin provided by gov-alpha. The script executes queries to add a 40% payment request to an applications, simulating a completed M1 40% Journey. \n\n"
 
 read -p 'Username: ' uservar
 read -sp 'Password: ' passvar
 
+# The -s flag should be modified to point at the correct environnement in which the target DB is situated
 eval cf login -a https://api.london.cloud.service.gov.uk -u ${uservar} -p ${passvar}  -o national-lottery-heritage-fund -s sandbox
 
 while IFS="," read -r amount app_id case_id form_id
